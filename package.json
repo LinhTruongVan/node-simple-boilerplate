@@ -1,0 +1,36 @@
+{
+  "name": "node-simple-boilerplate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint src",
+    "start": "nodemon --exec babel-node src/server.js",
+    "build": "babel src -d dist",
+    "serve": "node dist/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LinhTruongVan/node-simple-boilerplate.git"
+  },
+  "keywords": [],
+  "author": "Linh Truong",
+  "bugs": {
+    "url": "https://github.com/LinhTruongVan/node-simple-boilerplate/issues"
+  },
+  "homepage": "https://github.com/LinhTruongVan/node-simple-boilerplate#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.0",
+    "@babel/node": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "eslint": "^5.5.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-prettier": "^3.0.1",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-prettier": "^2.6.2",
+    "nodemon": "^1.18.4",
+    "prettier": "^1.14.2"
+  }
+}
