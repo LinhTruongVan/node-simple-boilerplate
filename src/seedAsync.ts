@@ -1,4 +1,4 @@
-import User from "./models/user";
+import User, { UserRole } from "./models/user";
 import { hashPasswordAsync } from "./utils/passwordService";
 import logger from "./utils/logger";
 
@@ -10,7 +10,8 @@ const seedSuperAdminAsync = async () => {
 
   const newSuperAdmin = new User({
     username: process.env.SUPER_ADMIN_USERNAME,
-    password: await hashPasswordAsync(process.env.SUPER_ADMIN_PASSWORD)
+    password: await hashPasswordAsync(process.env.SUPER_ADMIN_PASSWORD),
+    role: UserRole.SuperAdmin
   });
   await newSuperAdmin.save();
 };
