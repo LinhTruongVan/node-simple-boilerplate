@@ -11,10 +11,14 @@
   "tslint.autoFixOnSave": true,
   "tslint.exclude": "**/node_modules/**/*",
   "cSpell.words": [
+    "all",
     "csrf",
     "definitelytyped",
+    "jwtid",
     "promisified",
+    "promisify",
     "superadmin",
+    "uuidv",
     "virtuals"
   ]
 }
