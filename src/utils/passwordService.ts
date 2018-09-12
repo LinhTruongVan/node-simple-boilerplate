@@ -2,7 +2,7 @@ import bcrypt from "bcrypt-nodejs";
 
 const ROUNDS = 10;
 
-export const hashPasswordAsync = async (plainText: string): Promise<string> => {
+const hashPasswordAsync = async (plainText: string): Promise<string> => {
   return new Promise<string>((resolve, reject) => {
     bcrypt.genSalt(ROUNDS, (err, salt) => {
       if (err) {
@@ -18,7 +18,7 @@ export const hashPasswordAsync = async (plainText: string): Promise<string> => {
   });
 };
 
-export const comparePasswordAsync = async (plainText: string, hash: string): Promise<boolean> => {
+const comparePasswordAsync = async (plainText: string, hash: string): Promise<boolean> => {
   return new Promise<boolean>((resolve, reject) => {
     bcrypt.compare(plainText, hash, (err: Error, isMatch: boolean) => {
       if (err) {

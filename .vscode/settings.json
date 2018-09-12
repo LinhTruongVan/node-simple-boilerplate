@@ -12,9 +12,11 @@
   "tslint.exclude": "**/node_modules/**/*",
   "cSpell.words": [
     "all",
+    "alphanum",
     "csrf",
     "definitelytyped",
     "jwtid",
+    "middlewares",
     "promisified",
     "promisify",
     "superadmin",

@@ -8,7 +8,8 @@ import mongoose from "mongoose";
 import seedAsync from "./seedAsync";
 import logger from "./utils/logger";
 import { notFoundErrorHandler, globalErrorHandler } from "./utils/errorHandler";
-import homeRoutes from "./routes/homeRoutes";
+
+import appRoutes from "./routes";
 
 // Create Express server
 const app = express();
@@ -33,7 +34,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // Application routes
-app.use("/", homeRoutes);
+app.use("/v1", appRoutes);
 
 // Error handling
 app.use(notFoundErrorHandler);

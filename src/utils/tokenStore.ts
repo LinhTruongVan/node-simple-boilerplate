@@ -16,10 +16,10 @@ client.on("error", function(err) {
 
 const createTokenRedisKey = (userId: string, tokenId: string) => `user:${userId}:jwt:${tokenId}`;
 
-export const createTokenAsync = async (user: UserModel) => {
+const createTokenAsync = async (user: UserModel) => {
   const tokenId = uuidv4();
   const tokenPayload: TokenPayload = {
-    _id: user._id,
+    id: user.id,
     username: user.username,
     role: user.role,
     jti: tokenId
@@ -27,7 +27,7 @@ export const createTokenAsync = async (user: UserModel) => {
   const token = jwt.sign(tokenPayload, jwtSecret, {
     expiresIn: jwtExpiresIn
   });
-  const redisKey = createTokenRedisKey(user._id, tokenId);
+  const redisKey = createTokenRedisKey(user.id, tokenId);
   return new Promise<string>((resolve, reject) => {
     client.set(redisKey, "1", "EX", jwtExpiresIn, err => {
       if (err) {
@@ -38,7 +38,7 @@ export const createTokenAsync = async (user: UserModel) => {
   });
 };
 
-export const validateTokenAsync = async (token: string) => {
+const validateTokenAsync = async (token: string) => {
   return new Promise<TokenPayload>((resolve, reject) => {
     jwt.verify(
       token,
@@ -50,7 +50,7 @@ export const validateTokenAsync = async (token: string) => {
         if (err) {
           return resolve(undefined);
         }
-        const redisKey = createTokenRedisKey(tokenPayload._id, tokenPayload.jti);
+        const redisKey = createTokenRedisKey(tokenPayload.id, tokenPayload.jti);
         client.exists(redisKey, (err, numberOfTokens) => {
           if (err || !numberOfTokens) {
             return reject(undefined);
@@ -62,7 +62,7 @@ export const validateTokenAsync = async (token: string) => {
   });
 };
 
-export const invalidateTokenAsync = async (token: string) => {
+const invalidateTokenAsync = async (token: string) => {
   return new Promise<void>((resolve, reject) => {
     jwt.verify(
       token,
@@ -74,7 +74,7 @@ export const invalidateTokenAsync = async (token: string) => {
         if (err) {
           return resolve();
         }
-        const redisKey = createTokenRedisKey(tokenPayload._id, tokenPayload.jti);
+        const redisKey = createTokenRedisKey(tokenPayload.id, tokenPayload.jti);
         client.del(redisKey, err => {
           if (err) {
             return reject(err);

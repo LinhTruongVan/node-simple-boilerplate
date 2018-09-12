@@ -6,14 +6,14 @@ export enum UserRole {
 }
 
 export type AuthData = {
-  _id: string;
+  id: string;
   username: string;
   role: string;
   token: string;
 };
 
 export type TokenPayload = {
-  _id: string;
+  id: string;
   username: string;
   role: string;
   jti: string;
